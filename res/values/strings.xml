@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Parcel Application</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="imageContentDescription">Image</string>
+    <string name="color">Color</string>
+    <string name="currentLocation">Current Location [Live Update]</string>
+    <string name="searchHint">Search(Parcel Name)</string>
+    <string name="SortBy">Sort By</string>
+    <string name="totalParcels">Sort By</string>
+    <string name="value">Value</string>
+    <string name="weight">Weight</string>
+
+</resources>
