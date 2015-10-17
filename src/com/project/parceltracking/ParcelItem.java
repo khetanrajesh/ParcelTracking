@@ -2,13 +2,9 @@ package com.project.parceltracking;
 
 import java.util.Comparator;
 
-import android.graphics.Bitmap;
-
 import com.google.android.gms.maps.model.LatLng;
 
-
 public class ParcelItem implements Comparable<ParcelItem> {
-	
 
 	private String parcelImage;
 
@@ -17,14 +13,14 @@ public class ParcelItem implements Comparable<ParcelItem> {
 	private LatLng parcelLatlng;
 
 	private String parcelPrice, parcelName, parcelType, parcelPhone,
-			parcelDate, parcelQuantity;
+			parcelDate, parcelQuantity, parcelColor;
 
 	private int parcelId;
 
 	public ParcelItem(String parcelImage, float parcelWeight,
 			LatLng parcelLatlng, String parcelPrice, String parcelName,
 			String parcelType, String parcelPhone, String parcelDate,
-			String parcelQuantity, int parcelId) {
+			String parcelQuantity, int parcelId, String parcelColor) {
 		super();
 		this.parcelImage = parcelImage;
 		this.parcelWeight = parcelWeight;
@@ -35,8 +31,17 @@ public class ParcelItem implements Comparable<ParcelItem> {
 		this.parcelPhone = parcelPhone;
 		this.parcelDate = parcelDate;
 		this.parcelQuantity = parcelQuantity;
+		this.parcelColor = parcelColor;
 
 		this.parcelId = parcelId;
+	}
+
+	public String getParcelColor() {
+		return parcelColor;
+	}
+
+	public void setParcelColor(String parcelColor) {
+		this.parcelColor = parcelColor;
 	}
 
 	public LatLng getParcelLatlng() {
@@ -121,8 +126,7 @@ public class ParcelItem implements Comparable<ParcelItem> {
 
 	public int compareTo(ParcelItem compareParcel) {
 
-		String compareParcelName = ((ParcelItem) compareParcel)
-				.getParcelName();
+		String compareParcelName = ((ParcelItem) compareParcel).getParcelName();
 
 		// ascending order
 		return this.parcelName.compareTo(compareParcelName);

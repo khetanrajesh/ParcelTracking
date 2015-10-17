@@ -1,5 +1,6 @@
 package com.project.parceltracking;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.FilterInputStream;
 import java.io.IOException;
@@ -16,7 +17,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.widget.ImageView;
 
 public class ImageDownloader {
@@ -88,10 +88,15 @@ class BitmapDownloaderTask extends AsyncTask<String, Void, Bitmap> {
 	protected Bitmap doInBackground(String... params) {
 		// params comes from the execute() call: params[0] is the url.
 
-		Bitmap bitmap = downloadBitmap(params[0]);
+		Bitmap original = downloadBitmap(params[0]);
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		original.compress(Bitmap.CompressFormat.PNG, 100, out);
+		Bitmap decoded = BitmapFactory.decodeStream(new ByteArrayInputStream(
+				out.toByteArray()));
+
 		CacheImage ci = CacheImage.getInstance();
-		ci.addBitmapToMemoryCache(String.valueOf(params[1]), bitmap);
-		return bitmap;
+		ci.addBitmapToMemoryCache(String.valueOf(params[1]), decoded);
+		return decoded;
 	}
 
 	@Override
@@ -122,18 +127,7 @@ class BitmapDownloaderTask extends AsyncTask<String, Void, Bitmap> {
 			connection.connect();
 			InputStream input = connection.getInputStream();
 			Bitmap myBitmap = BitmapFactory.decodeStream(input);
-			ByteArrayOutputStream stream = new ByteArrayOutputStream();
-			
-			Log.d("height of bimap", " " + myBitmap.getHeight());
-			Log.d("width of bimap", " " + myBitmap.getWidth());
-			myBitmap.compress(Bitmap.CompressFormat.JPEG, 0, stream);
-			Log.d("height of bimap", " " + myBitmap.getHeight());
-			Log.d("width of bimap", " " + myBitmap.getWidth());
 
-			byte[] byteArray = stream.toByteArray();
-
-			stream.close();
-			stream = null;
 			return myBitmap;
 		} catch (Exception e) {
 			e.printStackTrace();

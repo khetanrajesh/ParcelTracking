@@ -64,7 +64,7 @@
                         android:layout_alignParentLeft="true"
                         android:layout_below="@+id/parcelName"
                         android:layout_margin="@dimen/margin_small"
-                        android:drawableLeft="@drawable/abc_ab_share_pack_mtrl_alpha"
+                        android:drawableLeft="@drawable/ic_type"
                         android:gravity="center" >
                     </TextView>
 
@@ -75,7 +75,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_below="@+id/parcelName"
                         android:layout_margin="@dimen/margin_small"
-                        android:drawableLeft="@drawable/abc_ab_share_pack_mtrl_alpha"
+                        android:drawableLeft="@drawable/ic_value"
                         android:gravity="center" >
                     </TextView>
 
@@ -86,7 +86,7 @@
                         android:layout_alignParentLeft="true"
                         android:layout_below="@+id/parcelType"
                         android:layout_margin="@dimen/margin_small"
-                        android:drawableLeft="@drawable/abc_ab_share_pack_mtrl_alpha"
+                        android:drawableLeft="@drawable/ic_weight"
                         android:gravity="center" >
                     </TextView>
 
@@ -97,7 +97,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_below="@+id/parcelType"
                         android:layout_margin="@dimen/margin_small"
-                        android:drawableLeft="@drawable/abc_ab_share_pack_mtrl_alpha"
+                        android:drawableLeft="@drawable/ic_quantity"
                         android:gravity="center" >
                     </TextView>
 
@@ -108,7 +108,7 @@
                         android:layout_alignParentLeft="true"
                         android:layout_below="@+id/parcelWeight"
                         android:layout_margin="@dimen/margin_small"
-                        android:drawableLeft="@drawable/abc_ab_share_pack_mtrl_alpha"
+                        android:drawableLeft="@drawable/ic_telephone"
                         android:gravity="center" >
                     </TextView>
 
@@ -116,10 +116,12 @@
                         android:id="@+id/parcelColor"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/parcelPhone"
                         android:layout_alignParentRight="true"
+                        android:layout_alignTop="@+id/parcelPhone"
                         android:layout_below="@+id/parcelWeight"
                         android:layout_margin="@dimen/margin_small"
-                        android:drawableLeft="@drawable/abc_ab_share_pack_mtrl_alpha"
+                        android:background="@drawable/circlebackground"
                         android:gravity="center"
                         android:text="@string/color" >
                     </TextView>
@@ -134,7 +136,9 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/card_view1"
-        android:layout_margin="@dimen/margin_medium"
+        android:layout_marginLeft="@dimen/margin_medium"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:layout_marginRight="@dimen/margin_medium"
         card_view:cardCornerRadius="2dp" >
 
         <TextView
@@ -156,7 +160,8 @@
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
         android:layout_below="@+id/card_view3"
-        android:layout_margin="@dimen/margin_medium" />
+        android:layout_margin="@dimen/margin_medium"
+        android:layout_marginTop="0dp" />
 
     <ImageView
         android:id="@+id/refreshLocation"

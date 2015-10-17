@@ -106,9 +106,9 @@ public class MainActivity extends AppCompatActivity {
 
 						Intent intent = new Intent(MainActivity.this,
 								ParcelDetailsActivity.class);
-						
-						
-						ParcelItem item = (ParcelItem) adapterView.getItemAtPosition(position);
+
+						ParcelItem item = (ParcelItem) adapterView
+								.getItemAtPosition(position);
 
 						intent.putExtra("parcelId", item.getParcelId());
 						startActivity(intent);
@@ -177,6 +177,7 @@ public class MainActivity extends AppCompatActivity {
 		String parcelImage;
 		float parcelWeight;
 		LatLng parcelLatlng;
+		String parcelColor;
 
 		try {
 
@@ -207,6 +208,9 @@ public class MainActivity extends AppCompatActivity {
 				parcelQuantity = (String) ((JSONObject) parcels.get(i))
 						.get("quantity");
 
+				parcelColor = (String) ((JSONObject) parcels.get(i))
+						.get("color");
+
 				parcelLatlng = new LatLng(
 						(double) ((JSONObject) ((JSONObject) parcels.get(i))
 								.get("live_location")).getDouble("latitude"),
@@ -223,7 +227,7 @@ public class MainActivity extends AppCompatActivity {
 						.add(new ParcelItem(parcelImage, parcelWeight,
 								parcelLatlng, parcelPrice, parcelName,
 								parcelType, parcelPhone, parcelDate,
-								parcelQuantity, i));
+								parcelQuantity, i ,parcelColor));
 			}
 
 			parcelArrayLocal = ParcelArrayList.parcelArray;
@@ -271,8 +275,7 @@ public class MainActivity extends AppCompatActivity {
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before,
 					int count) {
-				
-				
+
 				ArrayList<ParcelItem> parcelArrayfiltered = new ArrayList<ParcelItem>();
 
 				for (ParcelItem item : ParcelArrayList.parcelArray) {

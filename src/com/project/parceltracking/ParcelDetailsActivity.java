@@ -17,6 +17,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -39,7 +40,7 @@ public class ParcelDetailsActivity extends AppCompatActivity {
 
 	ImageView parcelImage, refreshLocation;
 	TextView parcelName, parcelPrice, parcelType, parcelWeight, parcelPhone,
-			parcelDate, parcelQuantity;
+			parcelDate, parcelQuantity, parcelColor;
 
 	LatLng parcelLatLng;
 
@@ -68,19 +69,19 @@ public class ParcelDetailsActivity extends AppCompatActivity {
 	private void initialize() {
 		// TODO Auto-generated method stub
 
-		ParcelItem pItem=null ;
+		ParcelItem pItem = null;
 
 		for (ParcelItem item : ParcelArrayList.parcelArray) {
 
 			if (item.getParcelId() == parcelId) {
 
 				pItem = item;
-				
+
 				break;
 			}
 
 		}
-		
+
 		final ParcelItem p = pItem;
 
 		parcelImage = (ImageView) findViewById(R.id.parcelImage);
@@ -112,6 +113,9 @@ public class ParcelDetailsActivity extends AppCompatActivity {
 
 		parcelQuantity = (TextView) findViewById(R.id.parcelQuantity);
 		parcelQuantity.setText(p.getParcelQuantity());
+
+		parcelColor = (TextView) findViewById(R.id.parcelColor);
+		parcelColor.setBackgroundColor(Color.parseColor(p.getParcelColor()));
 
 		refreshLocation = (ImageView) findViewById(R.id.refreshLocation);
 
