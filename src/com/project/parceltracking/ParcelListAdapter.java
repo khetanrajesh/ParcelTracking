@@ -27,66 +27,60 @@ public class ParcelListAdapter extends ArrayAdapter<ParcelItem> {
 		this.objects = objects;
 	}
 
-	public View getView(int position, View convertView, ViewGroup parent) {
+	public View getView(int position, View v, ViewGroup parent) {
 
-		// assign the view we are converting to a local variable
-		View v = convertView;
+		ViewHolder holder;
 
-		// first check to see if the view is null. if so, we have to inflate it.
-		// to inflate it basically means to render, or show, the view.
 		if (v == null) {
 			LayoutInflater inflater = (LayoutInflater) getContext()
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			v = inflater.inflate(R.layout.parcel_list_item, null);
+
+			holder = new ViewHolder();
+
+			holder.parcelName = (TextView) v.findViewById(R.id.parcelName);
+			holder.parcelImage = (ImageView) v.findViewById(R.id.parcelImage);
+			holder.parcelPrice = (TextView) v.findViewById(R.id.parcelPrice);
+
+			v.setTag(holder);
+		} else {
+
+			holder = (ViewHolder) v.getTag();
+
 		}
 
-		/*
-		 * Recall that the variable position is sent in as an argument to this
-		 * method. The variable simply refers to the position of the current
-		 * object in the list. (The ArrayAdapter iterates through the list we
-		 * sent it)
-		 * 
-		 * Therefore, i refers to the current Item object.
-		 */
 		ParcelItem i = objects.get(position);
 
 		if (i != null) {
 
-			// This is how you obtain a reference to the TextViews.
-			// These TextViews are created in the XML files we defined.
+			holder.parcelName.setText(i.getParcelName());
 
-			TextView parcelName = (TextView) v.findViewById(R.id.parcelName);
-			ImageView parcelImage = (ImageView) v
-					.findViewById(R.id.parcelImage);
-			TextView parcelPrice = (TextView) v.findViewById(R.id.parcelPrice);
+			holder.parcelPrice.setText("₹" + i.getParcelPrice());
 
-			// check to see if each individual textview is null.
-			// if not, assign some text!
-			if (parcelName != null) {
-				parcelName.setText(i.getParcelName());
-			}
-			if (parcelPrice != null) {
-				parcelPrice.setText("₹" + i.getParcelPrice());
-			}
-			if (parcelImage != null) {
+			final Bitmap bitmap = ci
+					.getBitmapFromMemCache(i.getParcelId() + "");
+			if (bitmap != null) {
 
-				final Bitmap bitmap = ci.getBitmapFromMemCache(i.getParcelId()
-						+ "");
-				if (bitmap != null) {
-					
-					Log.d("ParcelListAdapter", "Getting from cache image " + i.getParcelId());
-					parcelImage.setImageBitmap(bitmap);
-				} else {
+				Log.d("ParcelListAdapter",
+						"Getting from cache image " + i.getParcelId());
+				holder.parcelImage.setImageBitmap(bitmap);
+			} else {
 
-					imagedownloader.download(i.getParcelImage(), parcelImage,
-							i.getParcelId() + "");
+				imagedownloader.download(i.getParcelImage(),
+						holder.parcelImage, i.getParcelId() + "");
 
-				}
 			}
 		}
 
-		// the view must be returned to our activity
 		return v;
+
+	}
+
+	static class ViewHolder {
+
+		TextView parcelName;
+		ImageView parcelImage;
+		TextView parcelPrice;
 
 	}
 
